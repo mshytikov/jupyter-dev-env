@@ -53,7 +53,7 @@ docker-compose up jupyterlab
 Now try to crate some file in jupyter. Created file should have a proper
 permissions in your workdir.
 
-### Customaze
+### Customize
 
 If you want to add extra dependencies or functionality just update the
 Docker file in `docker-compose/Dockerfile` and rebuild the image.
