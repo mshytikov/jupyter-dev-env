@@ -10,6 +10,8 @@ services:
     image: $USER/scipy-notebook:$UID.$GID
     environment:
       JOBLIB_TEMP_FOLDER: /tmp
+      PYTHONUSERBASE: /workdir/.pip
+      PYTHONDONTWRITEBYTECODE: 1
     working_dir: /workdir
     volumes:
       - .:/workdir
@@ -22,6 +24,6 @@ services:
 
   jupyterlab:
     extends: app
-    command: jupyter lab --ip=0.0.0.0
+    command: jupyter lab
     ports:
       - 8888:8888
