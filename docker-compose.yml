@@ -10,9 +10,9 @@ services:
     image: $USER/scipy-notebook:$UID.$GID
     environment:
       JOBLIB_TEMP_FOLDER: /tmp
-    working_dir: /home/jovyan/work
+    working_dir: /workdir
     volumes:
-      - .:/home/jovyan/work
+      - .:/workdir
 
   jupyter:
     extends: app
