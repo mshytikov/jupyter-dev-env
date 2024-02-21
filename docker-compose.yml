@@ -1,29 +1,19 @@
-version: '2'
+version: '3.8'
 services:
   app:
-    build:
-      context: ./docker-compose
-      args:
-        host_uid: $UID
-        host_gid: $GID
-    # your local image with correct permissions
-    image: $USER/scipy-notebook:$UID.$GID
+    image: jupyter/scipy-notebook
+    command: jupyter lab
+    user: "${CONTAINER_USER}"
+    group_add:
+      - users
     environment:
       JOBLIB_TEMP_FOLDER: /tmp
       PYTHONUSERBASE: /workdir/.pip
       PYTHONDONTWRITEBYTECODE: 1
+      PATH: "/workdir/.pip/bin/:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      TMPDIR: /workdir/tmp
     working_dir: /workdir
     volumes:
       - .:/workdir
-
-  jupyter:
-    extends: app
-    command: jupyter notebook
     ports:
-      - 8888:8888
-
-  jupyterlab:
-    extends: app
-    command: jupyter lab
-    ports:
-      - 8888:8888
+      - 127.0.0.1:8888:8888
